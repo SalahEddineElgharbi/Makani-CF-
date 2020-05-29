@@ -1,0 +1,120 @@
+{% extends 'Templevaluteur/Dachboardeval.html' %}
+{% block content %}
+
+
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+              <div class="x_title">
+                  <h1> Le evaluateur : {{ evalu.user }} </h1>
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="x_content">
+
+<hr>
+<h3> Vous avez choisi :(La liste possible de voir quand Update you'r etat   ) </h3>
+<br>
+Si ily'a un problem >> Update    <a href="{% url 'Update' %}" class="btn btn-info btn-round ">Update Now ! </a>
+
+{% for comit in comits %}
+<li>
+ <h3> Pour Comite :  {{ comit }} </h3>
+ </li>  
+        <br>
+
+       {% for key, value in listd.items %}
+        
+              {% if comit == value %}
+              
+              {{key}} <br>
+
+              {% endif %}
+        
+        {% endfor %}
+
+        {% endfor %}
+<br><br><br>    
+<h1> Finalement ,Tous Mes articles sont : </h1>
+<div class="Container">
+<h3 style="color:red;">  A lire :</h3>
+<p> Si vous avez un problem tantque choisi les artilces est dans liste Suivant pas voir , on 2 cas Soit a cause de autre evaluteur choisi mm chois donc confil avec cette eval ou bien nbr article est petite !!! </p>
+<h3 style="color:blue;"> Ou bien la charge sur site donc faire aumoin 3 fois cette update pour bien confirme Que vous avez bien choisi  </h3>
+<p style="color:blue;"> Et Merci </p> 
+</div>
+<h1>Les article pour corrigez</h1>
+
+                <div class="table-responsive">
+                  <table class="table table-striped jambo_table bulk_action">
+                    <thead>
+                      <tr class="headings">
+                        <th>
+                                                </th>
+
+                        <th class="column-title" style="display: table-cell;">Title</th>
+                        <th class="column-title" style="display: table-cell;">date poste </th>
+                       
+                        <th class="column-title" style="display: table-cell;">author(Chercheur)</th>
+                        <th class="column-title" style="display: table-cell;">Conferance </th>
+                        <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Details</span>
+                        </th>
+                         <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Corrige</span>
+                        </th>
+                         <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Etat de cette article</span>
+                        </th>
+                        <th class="bulk-actions" colspan="7" style="display: none;">
+                          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+{% for art in evalu.artcl_a_corrige.all %}
+
+
+                      <tr class="even pointer">
+                        <td class="a-center ">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked="">
+                              <span class="form-check-sign"></span>
+                              
+                            </label>
+                          </div>                        </td>
+                        <td class=" ">{{ art.name }}</td>
+                        <td class=" ">{{art.date_posté}} </td>
+                        <td class=" ">{{art.author}}</td>
+                        <td class=" ">{{art.Conferance}}</td>
+                        <td class=" last"><a href="{% url 'evaluteur:listeArtcile' %}">View</a>
+                        </td>
+                         <td class=" last"><a href="{% url 'evaluteur:evaluéé' %}">Corrige Now !</a>
+                        </td>
+                         <td class=" last"><a href="#">Mon etat & notification </a>
+                        </td>
+                      </tr>
+                  
+{% endfor %}
+
+
+                    </tbody>
+
+                  </table>
+                </div>
+
+      
+              </div>
+               <a href="{% url 'Update' %}" class="btn btn-info btn-round btn-lg">Update Now ! </a>
+               <br>
+               <h1> Cest clair que cette update machi il arwah w dire 3ndeha wa9te w 3ndeha delee et nbrr ch3l mlkhtera hadi mchi haja apree implementeee </h1>
+             
+ 
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,438 @@
+{% extends 'Templchercheur/mainchr.html' %}
+{% load static %}
+{% block body_block %}
+ 
+  <div class="wrapper">
+    <div class="page-header">
+      <img src="{% static 'G-Admin_cherch_eval/img/dots.png' %}"
+       class="dots"> 
+      <img src="{% static 'G-Admin_cherch_eval/img/path4.png' %}"
+             class="path">
+      <div class="container align-items-center">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <h1 class=" text-left"> • Session chercheur </h1>
+            </div>
+          </div>
+
+
+
+<p>
+<a href="#"> o    Consultation de la procédure de la soumission des articles,</a>
+</p> <br>
+<p>
+ <a href="#"> o    Soumission d’un article,</a>
+</p> <br>
+<p>
+ <a href="#"> o    Récupération de la notification et les résultats de reviewing, </a>
+</p><br>
+<p>
+<a href="#">  o    Soumission de la version finale de l’article,</a>
+</p>
+
+
+          <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+            <div class="card card-coin card-plain">
+              <div class="card-header">
+
+
+              <a href="{{ user.profile_pict.url }}">
+                     <img class="img-center img-fluid rounded-circle"
+
+                     src="{{ user.profile_pict.url }}" >
+                      <h5 class="title"></h5>
+                    </a>
+
+
+                <h3 class="title"> Full Name: </h3>
+                <h4 class="title" > {{ user.first_name }} {{ user.last_name }}</h4>
+
+              </div>
+
+              <div class="card-body">
+                 <button><a href="{% url 'chercheur:EditeProfile' pk=user.pk %}"> Edite My Profile>> </a>
+                 </button>
+                <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#linka">
+                      << 01 >>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#linkb">
+                      << 02 >>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#linkc">
+                      << 03 >>
+                    </a>
+                  </li>
+                  
+                    <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#linkd">
+                      << 04 >>
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content tab-subcategories">
+                  <div class="tab-pane active" id="linka">
+                    <div class="row">
+                      <label class="col-sm-3 col-form-label">Username :  </label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                        <h4 class="text-white"> {{ user.username }}
+                        </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <label class="col-sm-3 col-form-label">Email:</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.email }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  <div class="row">
+                      <label class="col-sm-3 col-form-label">First Name:</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.first_name }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+                                    <div class="row">
+                      <label class="col-sm-3 col-form-label">Last Name:</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.last_name }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="tab-pane" id="linkb">
+                               <div class="row">
+                      <label class="col-sm-3 col-form-label">Organization :  </label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                        <h4 class="text-white"> {{ user.Organization }}
+                        </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <label class="col-sm-3 col-form-label">Phone:</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.Phone }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+
+             <div class="row">
+                      <label class="col-sm-3 col-form-label">Adersse 01(Principale):</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.Address_line_principale }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+
+             <div class="row">
+                      <label class="col-sm-3 col-form-label">Adersse02:</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                         <h4 class="text-white">                   
+                            {{ user.Address_line }}
+                           </h4>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="tab-pane" id="linkc">
+                    <div class="row">
+                      <label class="col-sm-3 col-form-label">Country</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                  
+                        <h4 class="text-white">                   
+                           {{ user.Country }}
+                           </h4>
+                        </div>
+                      </div>
+                    </div>
+                                
+                      <div class="row">
+                      <label class="col-sm-3 col-form-label">City</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                <h4 class="text-white">                   
+                        {{ user.City }}
+                      </h4>
+
+                        </div>
+                      </div>
+                    </div>
+                                <div class="row">
+                      <label class="col-sm-3 col-form-label">Country</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                   <h4 class="text-white">
+                          {{ user.Country }}
+
+                                </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                
+
+          <div class="row">
+                      <label class="col-sm-3 col-form-label">Poste code</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                          <h4 class="text-white">                   
+                 {{ user.Post_code }}
+                    </h4>
+                        </div>
+                      </div>
+                    </div></div>
+
+
+                  <div class="tab-pane" id="linkd">
+
+               <div class="row">
+                      <label class="col-sm-3 col-form-label">ID :</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+               <h4 class="text-white">                   
+                       5q1xg4!6ml!u{{ user.pk }}k7g2 
+                     </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                                
+                      <div class="row">
+                      <label class="col-sm-3 col-form-label">Site</label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                            <a    href={{ user.site_Personnel }}> {{ user.site_Personnel }}</a>
+
+                        </div>
+                      </div>
+                    </div>
+                        
+                  <div class="row">
+                      <label class="col-sm-3 col-form-label">See more detail or change  ,update ... </label>
+                      <div class="col-sm-9">
+                        <div class="form-group">
+          <h4 class="text-white">                  
+                          <a href="{% url 'chercheur:EditeProfile' pk=user.pk %}">
+                           More ! </a>
+                         </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+
+
+
+         <div class="container ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i> Voir etat de Ma Article !
+              </button>
+            </div>
+
+<br><br><br>
+
+         <div class="container ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i>  Voir exmplaire & et comment Poste mon Article
+              </button>
+            </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-md-6">
+            <div class="row justify-content-between align-items-center">
+         
+
+       <div class="col-md-5">
+            <h1 class="profile-title text-left">Contact us , pour ++ d'info !</h1>
+            <h5 class="text-on-back">les dates important  </h5>
+            <p class="profile-description text-left">
+              <br>
+déposé article   
+<br>
+  date limite soumission <br>
+      revieuers(évaluation) 
+    <br> date fin évaluation   
+
+ préparation chercheur  conférence   
+ <br>     date de conférence
+ <br>      conférence 
+ 
+ <br>     Sinon  "annuler" 
+
+              </p>
+
+            </div>
+
+
+            </div>
+          </div>
+          <div class="col-md-5">
+            <h1 class="profile-title text-left">My etape avnat choix d'Article Regles</h1>
+            <h5 class="text-on-back">Des regles </h5>
+            <p class="profile-description text-left">
+              
+     Il s’agit de toute personne ayant rédigé un article qui s’articule autour du thème<br>
+      principal de la conférence et qui souhaite le soumettre en ligne pour évaluation.
+<br>
+
+(
+poster article par dialogue box (fenêtre ouvrante)
+<br>
+ Si article ajouter sans problème  affichage article (background (fenêtre principale ))
+<br>
+Sinon  notification email : article non posté (erreur)
+)
+**Le chercheur accède à l’interface du site puis s’authentifie s’il est déjà inscrit 
+<br>
+sinon il faut inscrit  
+<br>
+**il crée un compte dans laquelle il va remplir un formulaire pour fournir un certain 
+<br>
+nombre d’informations, notamment, son nom, un mot de passe, un bref résumé et les différents thèmes qu’il aborde Une fois que ces informations ont été correctement saisies, le système ajoute cette personne  a la base de donné de l’utilisateur afin de ne pas répéter  la même longue procédure à chaque fois il veut poster un article .
+** le système donne la main à l’utilisateur pour sélectionner le thème en question .
+ alors :
+     **  s’inscrire (intéresser)/ annuler (non intéresser) conférence . 
+     ** le chercheur peut soumettre un(des) article(s) format pdf.
+     **  supprimer ou modifier les articles soumis si la date précise par l’administrateur ne                                       termine pas 
+      ** modifier leur profiles.
+      ** il peut voir les informations de la conférence(programme, modification , des nouvelles …(lien si réussit ))
+
+            </p>
+   
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+
+             <div class="btn-wrapper pt-3 ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i> nouveau theme et nouveau dates !
+              </button>
+            </div>
+
+
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-plain">
+            <div class="card-header">
+              <h1 class="profile-title text-left">*****  By Makani-CF- ******</h1>
+              <h5 class="text-on-back">Just click ,Pour contact </h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>
+<h2 class="text-white">
+          Contact Rapide By email off user !! ,
+<br>
+you need to use You'r email  off signin , 
+    </h2>
+           
+                    </div>
+                  </div>
+                 
+                </div>
+                <button type="submit" class="btn btn-primary btn-round float-right" >
+               <a href="{% url 'chercheur:Contact_chrch_ou_admin' %}"> <<< Send iT >>>  </a>
+              </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <div class="info info-horizontal">
+            <div class="icon icon-primary">
+              <i class="tim-icons icon-square-pin"></i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">Find us at the office</h4>
+              <p> Makani@gemail.com
+                <br> ESI SBA ,
+                <br> Algeria
+              </p>
+            </div>
+          </div>
+          <div class="info info-horizontal">
+            <div class="icon icon-primary">
+              <i class="tim-icons icon-mobile"></i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">Give us a ring</h4>
+              <p> 
+                <br> +47 77 77 777 777 77 
+                <br> Mon - Mai, 2020 - 06 -10
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  </div>
+  
+
+  {% endblock %}

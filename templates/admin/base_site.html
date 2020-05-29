@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+
+{{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">
+	From MAKANI -CF- (Groups Adminstrations) :
+<br>
+●	Elgharbi salah eddine 
+<br>
+●	Benmsabihe toufik
+<br>
+●	Merzouk mohammed islam
+<br>
+●	Boukhatem Ahmed
+<br>
+●	Boudouara nadjete
+<br>
+●	Talbi narimane
+</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+       <ul class="">
+          <li class="">
+            <a href="{% url 'dashboard' %}">
+              <p style="color:red;">Go Dashboard Adminstration  </p>
+            </a>
+          </li>
+
+</ul>
+{% endblock %}

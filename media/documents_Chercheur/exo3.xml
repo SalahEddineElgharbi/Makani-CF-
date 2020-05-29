@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE annexpaye SYSTEM "exo3.dtd">                                    <!--  Dtd extren et privee ( System)  -->
+
+<annexpaye xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+    xs:noNamespaceSchemaLocation="ex3.xsd">
+
+
+    <pay nom =' algerie'>
+        <population anee ='2020'> 2181542</population>
+        <capital>alger</capital>
+    </pay>
+    
+    <pay nom =' tunisie'>
+        <population anee ='2019'> 1184956</population>
+        <capital>tunis</capital>
+    </pay>
+    
+      
+</annexpaye>

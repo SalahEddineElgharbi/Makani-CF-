@@ -1,0 +1,37 @@
+{% extends 'account/mybase.html' %} 
+{% block body_block %} 
+<div class="container">
+
+      <tr>
+        <td>
+            <a href="{% url 'evaluteur:listeArtcile' %}">
+             
+              <p>All Articles</p>
+            </a>
+         </td>
+<td>
+            <a href="{% url 'evaluteur:All_Confernce' %}">
+             
+              <p>All Confernces</p>
+            </a>
+        
+</td>
+     <td>        
+            <a href="{% url 'evaluteur:Etat_All_Chrch' %}">
+             
+              <p>All Chercher</p>
+            </a>
+        </td>
+
+             <td> 
+            <a href="{% url 'evaluteur:AllCommite' %}">
+             
+              <p>All Commite </p>
+            </a>
+    </td>
+
+</tr>
+
+        </div>
+
+  {% endblock %}

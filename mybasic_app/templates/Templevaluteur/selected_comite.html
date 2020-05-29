@@ -1,0 +1,41 @@
+{% extends 'Templevaluteur/Dachboardeval.html' %}
+{% block content %}
+
+
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+<h1>Votre Comite est : </h1> 
+<br>
+<h1 style="color:blue;"> Choix des Articles :
+ Cette choix est un delée donne par admin tsema hnaa mnb3de tetrigle 3l hsabe wa9ta  </h1>
+<p> Clicke sur comite pour voir des article est choisi 3 article !!! </p>
+<h4 style="color:red;"> mais attention cette procedure n'est pas 100% sure , a cause de les statistiques de nbr chrcheur et nbr des evaluteur et nbr des article  </h4>
+<p> Et merci </p>
+<br>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card">
+ 
+       {% for cm in comits %}
+
+            <a class="btn btn-warning"  href="{% url 'evaluteur:specefic' cm.id %}">{{ cm.sepiceilite }} 
+            </a>
+          <br><br>
+          
+          {% endfor %}
+
+    </div>
+   </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
