@@ -205,27 +205,52 @@ def Destribute(request , pk):
 			continue
 
    				
-		if arts.first().evalu in evals.all() :
-			pair = Pair(comit = comit , evalu = arts.first().evalu , arti = ar)
-			pair.save()
 
 
-		if arts.first() in art1 :
 
-			sample = Choosing_map.objects.filter(evalu = arts.first().evalu , comit = comit ).first()
-			sample.satis += 3
-			sample.save()
+		indo = arts.first().satis
+		bundle = arts.filter(satis = indo)
+
+		ero1 = bundle.filter(art1 = ar)
+		ero2 = bundle.filter(art2 = ar)
+		ero3 = bundle.filter(art3 = ar)
 
 
-		if arts.first() in art2 :
-			sample = Choosing_map.objects.filter(evalu = arts.first().evalu , comit = comit ).first()
-			sample.satis += 2
-			sample.save()
+		if ero1 :
 
-		if arts.first() in art3 :
-			sample = Choosing_map.objects.filter(evalu = arts.first().evalu , comit = comit ).first()
-			sample.satis += 1
-			sample.save()
+				if ero1.first().evalu in evals.all() :
+					pair = Pair(comit = comit , evalu = ero1.first().evalu , arti = ar)
+					pair.save()
+
+					sample = Choosing_map.objects.filter(evalu = ero1.first().evalu , comit = comit ).first()
+					sample.satis += 3
+					sample.save()
+
+
+		elif ero2 :
+				if ero2.first().evalu in evals.all() :
+					pair = Pair(comit = comit , evalu = ero2.first().evalu , arti = ar)
+					pair.save()
+
+					sample = Choosing_map.objects.filter(evalu = ero2.first().evalu , comit = comit ).first()
+					sample.satis += 2
+					sample.save()
+
+
+		elif ero3  :
+				if ero3.first().evalu in evals.all() :
+					pair = Pair(comit = comit , evalu = ero3.first().evalu , arti = ar)
+					pair.save() 
+
+					sample = Choosing_map.objects.filter(evalu = ero3.first().evalu , comit = comit ).first()
+					sample.satis += 1
+					sample.save()
+
+
+
+
+
+
 
 
 	clean = Choosing_map.objects.all() 
