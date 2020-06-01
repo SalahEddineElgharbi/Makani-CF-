@@ -30,27 +30,19 @@ def Update(request):
 
 
 
-
 @login_required
 def division(request):
-	print('*****************************************************')
-	print('*************************************************************')
-	print('*************************************************************************')
-
-
-
+   
 	All_Conf = Conferance.objects.all()
 	All_Eval = Evaluateur.objects.all()
 	All_Comite = Commite.objects.all()
 	All_Artcl = Article.objects.all()             #obj >>>>>   queryset  >>>> liste bch nkhdeme bien 
 
 
-
- 	#+++++++++++++++++++++++++++++++++ evite problem de duplication et ecrasment ::
+	#+++++++++++++++++++++++++++++++++ evite problem de duplication et ecrasment ::
 	for evll in All_Eval:
 		evll.artcl_a_corrige.clear()
 		
-			
 
 	nb_cf = All_Conf.count()
 	nb_evl = All_Eval.count()
@@ -61,14 +53,8 @@ def division(request):
 	list_articl = list(All_Artcl)
 	liste_of_commite = list(All_Comite)
 	
-	i = 0
-	l=0
-	g=0
-	s=0
-	w=0
-	a=0
 
-  # ++++++++++++++++++++++++++++++++++++++++++++++
+# ++++++++++++++++++++++++++++++++++++++++++++++
 	Choisi_par_3 = Pair.objects.all()
 	List_off_Choisi_par_3=list(Choisi_par_3)
 	List_off_Artcl_Choix = []
@@ -78,24 +64,15 @@ def division(request):
 		List_off_Artcl_Choix.append(List_off_Choisi_par_3[a].arti)
 		
 
-
 	print('')
-	print('///////////////*** les article par Sont comite apre mth 1 + 2 ***/////////////////////')
+	print('///////////////*** les article par comite apre mth 1 + 2 ***/////////////////////')
 	print('')
-
 
 	for Conf in All_Conf:
-
 		for j in range(nb_cm):
-
-
-			evl_in_cm=liste_of_commite[j].evaluteur_list.all()
-			list_of_evl_iN_cm = list(evl_in_cm)   # hna nkhdeme dakhel fi kol commite b index t3 chaque eval
 			
 			if Conf.Commite == liste_of_commite[j]:
-
-			
-
+				
 				#+++++++++++++++++++++++++++++++
 				print('')
 				print('////////*** Aplle de 3eme methode de choix ***/////')
@@ -103,48 +80,36 @@ def division(request):
 
 				Destribute(request,liste_of_commite[j].pk) #hadi  bach n3yte distrubue w nmdlhom par mth 3
 
-				Nbr_eval_in_Cm = 0
-				Nbr_Artcl_in_Cm = 0
 
-				Nbr_eval_in_Cm =len(list_of_evl_iN_cm)
-		
+				evl_in_cm = liste_of_commite[j].evaluteur_list.all()
+				list_of_evl_iN_cm = list(evl_in_cm)   # hna nkhdeme dakhel fi kol commite b index t3 chaque eval
+				Nbr_Artcl_in_Cm = 0
+				Num_eval_in_Cm = 0
+				
+
 				print('')
 				print('////*** Division __Commite > ',liste_of_commite[j] ,' ***////')
 				print('')
 
+															 
+				Nbr_eval_in_Cm = len(list_of_evl_iN_cm)         # 4  evaluateurs dans chaque comite
+				# si il n ya pas d'evaluateur !! on sort
+				for art in range(nb_acl):     
 
-				for art in range(nb_acl):
+					if  list_articl[art] not in  List_off_Artcl_Choix :     # le cas de pas choisi donc :   
+
+						if list_articl[art].Conferance == Conf:
+							Nbr_Artcl_in_Cm = Nbr_Artcl_in_Cm + 1
 	
-					if  list_articl[art] not in  List_off_Artcl_Choix :     # le cas de pas choisi donc :
-				
+							if Num_eval_in_Cm == Nbr_eval_in_Cm :  
+								Num_eval_in_Cm = 0
+						
+							if Num_eval_in_Cm != Nbr_eval_in_Cm :
+								list_of_evl_iN_cm[Num_eval_in_Cm].artcl_a_corrige.add(list_articl[art])
+								print('article ',list_articl[art].name ,'distribué a ',list_of_evl_iN_cm[Num_eval_in_Cm])
 
-							if list_articl[art].Conferance == Conf:
-								Nbr_Artcl_in_Cm = Nbr_Artcl_in_Cm + 1 
-												  
-			
-								Mx_index_D_evl_in_cm = len(list_of_evl_iN_cm) - 1 # hado (-1) bch nbda b index de liste ml zero
-							
+								Num_eval_in_Cm = Num_eval_in_Cm + 1
 
-								if Nbr_Artcl_in_Cm <= Nbr_eval_in_Cm:
-									s = Mx_index_D_evl_in_cm - g  
-									if s>=0:			      
-										list_of_evl_iN_cm[s].artcl_a_corrige.add(list_articl[art])
-									
-										g=g+1
-
-
-								if Nbr_eval_in_Cm<Nbr_Artcl_in_Cm:                                             
-									w = Mx_index_D_evl_in_cm - l  
-									if w >=0:  
-									   list_of_evl_iN_cm[w].artcl_a_corrige.add(list_articl[art])
-									   
-									   l = l + 1
-									else :
-										l=0
-										w = Mx_index_D_evl_in_cm - l
-										list_of_evl_iN_cm[w].artcl_a_corrige.add(list_articl[art])
-										
-										l = l + 1     # kyn riglage hna matnsahchee
 
 					else: #cas t3 li khayro c bn ta3tihomlhom 
 
@@ -157,18 +122,13 @@ def division(request):
 															 and (List_off_Choisi_par_3[a].comit== liste_of_commite[j])):
 
 									List_off_Choisi_par_3[a].evalu.artcl_a_corrige.add(List_off_Choisi_par_3[a].arti)
-											
-
-		  # pour reinsializeee les varrr pour novel comm
-		g=0
-		l=0
-
-		print(' Confrence >>>>>> ',Conf,' Nbr_arcl = :', Nbr_Artcl_in_Cm ,'Et Nbr_eval =: ', Nbr_eval_in_Cm)
 
 
-
-
-
+				print('Chaque Confrence   >>>>>>>>>> Title = ',Conf.title ,' Nbr_arcl  = :', Nbr_Artcl_in_Cm ,'Et Nbr_eval =: ', Nbr_eval_in_Cm)	
+		
+	return render(request, 'Pour_Evaluaéé/mth_evluéé.html')
+	
+  
 
 #///////////////////////////////////////////////////////////////////////////////////// 27/05/2020 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -189,7 +149,7 @@ def Destribute(request , pk):
 	Choix_auncien = Pair.objects.filter(comit=pk)
 	for choix in Choix_auncien :
 		choix.delete()                  #pour evite les auncien choix et ecrase tjr active avec nvvv
-		                                 #  w tani bch ykhdem b likhyrehom mchi yg3ode il ybdel 
+										 #  w tani bch ykhdem b likhyrehom mchi yg3ode il ybdel 
 
 
 
@@ -204,9 +164,7 @@ def Destribute(request , pk):
 		if not arts :		
 			continue
 
-   				
-
-
+				
 
 		indo = arts.first().satis
 		bundle = arts.filter(satis = indo)
@@ -248,11 +206,6 @@ def Destribute(request , pk):
 
 
 
-
-
-
-
-
 	clean = Choosing_map.objects.all() 
 	for one in clean :
 		one.satis = 0
@@ -260,7 +213,3 @@ def Destribute(request , pk):
 
 
 	context = { }
-
-
-
-
