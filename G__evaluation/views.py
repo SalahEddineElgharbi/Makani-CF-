@@ -142,67 +142,225 @@ from G__evaluation.models import Pair,Choosing_map
 def Destribute(request , pk):
 	conf = Conferance.objects.get(Commite = pk)
 	comit = Commite.objects.get( pk = pk )
-	evals = comit.evaluteur_list 
+	evals = comit.evaluteur_list.all() 
 	qs = Article.objects.filter(Conferance = conf)
+
+	##############################################################################
+	##############################################################################
+	##############################################################################
+
+	for a in evals :
+		a.count_pair_temporaire = 0
+		a.save()
+
+	clean = Choosing_map.objects.all() 
+	for one in clean :
+		one.satis = 0
+		one.save()
+
+	ar_num = qs.count()
+	ev_nu = evals.count()
+
+	limit = ar_num // ev_nu
+
+	if  ar_num % ev_nu != 0 :
+		limit += 1
+
+	#'EV = evals.filter(count_pair_temporaire__lte = limit )
+
+	##############################################################################
+	##############################################################################
+	##############################################################################
 
 
 	Choix_auncien = Pair.objects.filter(comit=pk)
 	for choix in Choix_auncien :
 		choix.delete()                  #pour evite les auncien choix et ecrase tjr active avec nvvv
-										 #  w tani bch ykhdem b likhyrehom mchi yg3ode il ybdel 
+		                                 #  w tani bch ykhdem b likhyrehom mchi yg3ode il ybdel 
 
 
 
-	for ar in qs :
-	
-		art1 = Choosing_map.objects.filter(art1 = ar)
-		art2 = Choosing_map.objects.filter(art2 = ar)
-		art3 = Choosing_map.objects.filter(art3 = ar)
 
-		arts = Choosing_map.objects.filter( Q(art1 = ar) | Q(art2 = ar) | Q(art3 = ar) ).order_by('satis')
 
-		if not arts :		
-			continue
+   				
 
+
+
+
+
+
+
+	##############################################################################
+	##############################################################################
+	##############################################################################
+
+	cho = Choosing_map.objects.filter(comit = comit)
+	arti= Article.objects.none()
+	EEV = Evaluateur.objects.none()
+	hell = Choosing_map.objects.none()
+
+	cho_count = cho.count()
+	for k in cho :
+
+		EEV = EEV.union(Evaluateur.objects.filter(pk = k.evalu.pk , count_pair_temporaire__lt = limit ))
+
+	EEV_count = EEV.count()
+
+	EV = EEV.filter(count_pair_temporaire__lt = limit )
+
+	EV_count = EV.count()
+
+
+ ##############################################
+ ############################################## for reduction por
+ ##############################################
+
+	for each in EV :
+		hell = hell.union(cho.filter(evalu = each)).distinct()
+
+	hell_count = hell.count()
+
+	for k in hell :
+			art1 = k.art1
+			art2 = k.art2
+			art3 = k.art3
+		
+			arti = Article.objects.filter( Q(pk = art1.pk) | Q(pk = art2.pk) | Q(pk = art3.pk) ).distinct()
+
+
+ ##############################################
+ ##############################################
+
+
+	if cho :
+
+		while True :
+
+	         ######################################################################################
+	          ######################################################################################     arrange the "choosing_maps" that match to "EV" and retreiving their "articles"
+	           ######################################################################################
+			hell = Choosing_map.objects.none()
+
+			for each in EV :
+				hell = hell.union(cho.filter(evalu = each)).distinct()
+
+
+			for k in hell :
+					art1 = k.art1
+					art2 = k.art2
+					art3 = k.art3
 				
-
-		indo = arts.first().satis
-		bundle = arts.filter(satis = indo)
-
-		ero1 = bundle.filter(art1 = ar)
-		ero2 = bundle.filter(art2 = ar)
-		ero3 = bundle.filter(art3 = ar)
+					arti = Article.objects.filter( Q(id__in = arti) & (Q(pk = art1.pk) | Q(pk = art2.pk) | Q(pk = art3.pk)) ).distinct()
 
 
-		if ero1 :
-
-				if ero1.first().evalu in evals.all() :
-					pair = Pair(comit = comit , evalu = ero1.first().evalu , arti = ar)
-					pair.save()
-
-					sample = Choosing_map.objects.filter(evalu = ero1.first().evalu , comit = comit ).first()
-					sample.satis += 3
-					sample.save()
+			 ######################################################################################
+			  ######################################################################################
+			   ######################################################################################
 
 
-		elif ero2 :
-				if ero2.first().evalu in evals.all() :
-					pair = Pair(comit = comit , evalu = ero2.first().evalu , arti = ar)
-					pair.save()
-
-					sample = Choosing_map.objects.filter(evalu = ero2.first().evalu , comit = comit ).first()
-					sample.satis += 2
-					sample.save()
 
 
-		elif ero3  :
-				if ero3.first().evalu in evals.all() :
-					pair = Pair(comit = comit , evalu = ero3.first().evalu , arti = ar)
-					pair.save() 
 
-					sample = Choosing_map.objects.filter(evalu = ero3.first().evalu , comit = comit ).first()
-					sample.satis += 1
-					sample.save()
+			eev = hell.order_by('satis')
+
+			indo = eev.first().satis
+			bundle = eev.filter(satis = indo)
+
+			for oz in bundle :
+
+				ero1 = oz.art1
+				ero2 = oz.art2
+				ero3 = oz.art3
+				if ero1 in arti :
+						if oz.evalu in EV.all() :
+							arti = arti.exclude(id =ero1.id)   ######################################################################################
+							pair = Pair(comit = comit , evalu = oz.evalu , arti = ero1)
+							pair.save()
+
+							this = Evaluateur.objects.get( pk =oz.evalu )
+							this.count_pair_temporaire += 1
+							this.save()
+
+							sample = Choosing_map.objects.filter(evalu = oz.evalu  , comit = comit ).first()
+							sample.satis += 3
+							sample.save()
+
+							arti = arti.exclude(id =ero1.id)
+
+							break
+
+				elif ero2 in arti : 
+						if oz.evalu in EV.all() :
+							arti = arti.exclude(id =ero2.id)   ######################################################################################
+							pair = Pair(comit = comit , evalu = oz.evalu   , arti = ero2)
+							pair.save()
+
+							this = Evaluateur.objects.get( pk =oz.evalu )
+							this.count_pair_temporaire += 1
+							this.save()
+
+							sample = Choosing_map.objects.filter(evalu = oz.evalu  , comit = comit ).first()
+							sample.satis += 2
+							sample.save()
+
+							arti = arti.exclude(id=ero2.id)
+
+							break
+
+				elif ero3 in arti :
+						if oz.evalu in EV.all() :
+							arti = arti.exclude(id =ero3.id)  ######################################################################################
+							pair = Pair(comit = comit , evalu = oz.evalu   , arti = ero3)
+							pair.save()
+
+							this = Evaluateur.objects.get( pk =oz.evalu  )
+							this.count_pair_temporaire += 1
+							this.save()
+
+							break
+
+							sample = Choosing_map.objects.filter(evalu = oz.evalu , comit = comit ).first()
+							sample.satis += 1
+							sample.save()
+
+							arti = arti.exclude(id =ero3.id)
+
+							break
+
+
+			 ##############################################################################
+			 ##############################################################################  adjust the size of "EV" by making it smaller whenever an ev exceeds the set limit 
+			 ##############################################################################	 using "count_pair_temporaire"
+
+
+			for S in EV :
+
+				EEV = EEV.union(Evaluateur.objects.filter(pk = S , count_pair_temporaire__lt = limit ))
+
+			EV = EEV.filter(count_pair_temporaire__lt = limit )
+
+			 ##############################################################################
+			 ##############################################################################
+			 ##############################################################################
+
+
+
+			if not (arti and EV) :  ################################### because there is nothing like a "do while" in django , i had to do a ( while true : if condition :break )
+				break
+
+
+
+
+
+
+ ##############################################################################
+ ##############################################################################
+ ##############################################################################
+
+
+	for a in evals :
+		a.count_pair_temporaire = 0
+		a.save()
 
 
 
@@ -212,4 +370,4 @@ def Destribute(request , pk):
 		one.save()
 
 
-	context = { }
+	context = {}
