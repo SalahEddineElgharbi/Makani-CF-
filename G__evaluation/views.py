@@ -10,6 +10,10 @@ from mybasic_app.models import (User, Evaluateur, Chercheur,
 from mybasic_app.decorators import evaluteur_required
 
 
+import time
+
+
+
 
 # hadi hiyaa li rahi t9l3naaa 
 
@@ -72,14 +76,13 @@ def division(request):
 
 
 		# ++++++++++++++++++++++++++++++++++++++++++++++
-		Choisi_par_3 = Pair.objects.filter(comit = Conf.Commite)
-		List_off_Choisi_par_3=list(Choisi_par_3)
+
 
 
 
 		#evl_in_cm = liste_of_commite[j].evaluteur_list.all()
 		evl_in_cm = Conf.Commite.evaluteur_list.all()
-		list_of_evl_iN_cm = list(evl_in_cm)   # hna nkhdeme dakhel fi kol commite b index t3 chaque eval
+		#list_of_evl_iN_cm = list(evl_in_cm)   # hna nkhdeme dakhel fi kol commite b index t3 chaque eval
 		Nbr_Artcl_in_Cm = 0
 		Num_eval_in_Cm = 0
 
@@ -109,67 +112,84 @@ def division(request):
 		limit = ar_num // ev_nu
 
 		if  ar_num % ev_nu != 0 :
-		    limit += 1
+			limit += 1
 
 		#'EV = evals.filter(count_pair_temporaire__lte = limit )
 
 		##############################################################################
 		##############################################################################
-        ##############################################################################
+		##############################################################################
 
 	
 
 		Destribute(request,Conf.Commite.pk,limit) #hadi  bach n3yte distrubue w nmdlhom par mth 
-		
+
+		evl_in_cm = Conf.Commite.evaluteur_list.all()
+		list_of_evl_iN_cm = list(evl_in_cm) 
 		
 
-		print('')
-		print('////*** Division __Commite > ',Conf.Commite ,' ***////')
-		print('')
 
+
+		Choisi_par_3 = Pair.objects.filter(comit = Conf.Commite)
+		List_off_Choisi=list(Choisi_par_3)
 													 
-		Nbr_eval_in_Cm = len(list_of_evl_iN_cm)-1         # 4  evaluateurs dans chaque comite
+		Nbr_eval_in_Cm = len(list_of_evl_iN_cm)        # 4  evaluateurs dans chaque comite
 		# si il n ya pas d'evaluateur !! on sort
 
 	###########################  1. distribution article choisi    ##########""################"
+		List_off_Choisi_par_3 = []
+		for a in range(len(List_off_Choisi)):
 
-		for a in range(len(List_off_Choisi_par_3)):
-
-			List_off_Choisi_par_3[a].evalu.artcl_a_corrige.add(List_off_Choisi_par_3[a].arti)
+			List_off_Choisi[a].evalu.artcl_a_corrige.add(List_off_Choisi[a].arti)  
+			List_off_Choisi_par_3.append(List_off_Choisi[a].arti)
 	#############################################################################################""
 
 
 		# list_articl = sub(list_articl, List_off_Choisi_par_3) --> article non choisi 
+		c = [x for x in list_articl if x not in List_off_Choisi_par_3]
+
+		list_articl = c 
+
+
 		nb_acl = len(list_articl)
 
+		i = 0
+		print('limit    >>>>>>>>>> ',limit ,'>>>>>>>>>')
+		print('evals    >>>>>>>>>> ',Nbr_eval_in_Cm ,'>>>>>>>>>')
 		for art in range(nb_acl):    # article de comite non choisit  
+
+			print('Chaque Confrence   >>>>>>>>>> ',nb_acl,'>>>>>>>>>' ,art)
 
 			give = False
 
-			while Num_eval_in_Cm != Nbr_eval_in_Cm & not give :
-				if list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire < limit
-				    list_of_evl_iN_cm[Num_eval_in_Cm].artcl_a_corrige.add(list_articl[art]) 
-				    give = True
-				    list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire = list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire + 1
-				    print('article ',list_articl[art].name ,'distribué a ',list_of_evl_iN_cm[Num_eval_in_Cm])
+			while ((Num_eval_in_Cm != Nbr_eval_in_Cm ) & (not give)) :
+				if list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire < limit :
+					list_of_evl_iN_cm[Num_eval_in_Cm].artcl_a_corrige.add(list_articl[art]) 
 
-		        Num_eval_in_Cm = Num_eval_in_Cm + 1
-					
-			    if Num_eval_in_Cm == Nbr_eval_in_Cm
-				    Num_eval_in_Cm = 0
+					give = True
+					list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire = list_of_evl_iN_cm[Num_eval_in_Cm].count_pair_temporaire + 1
+					print('article ',list_articl[art].name ,'distribué a ',list_of_evl_iN_cm[Num_eval_in_Cm])
 
-			#else: #cas t3 li khayro c bn ta3tihomlhom 
+				Num_eval_in_Cm = Num_eval_in_Cm + 1
+				
+				if Num_eval_in_Cm == Nbr_eval_in_Cm :
+					Num_eval_in_Cm = 0
+			
+			i += 1
 
-				# hada zdetehe bch tmdelna nmbr article f cm nichan maybdach yzidena kol khatera t3 li khyrhom
-				 #if list_articl[art].Conferance == Conf:
-				 #  Nbr_Artcl_in_Cm = Nbr_Artcl_in_Cm + 1 
+		for a in evl_in_cm :
+			a.count_pair_temporaire = 0
+			a.save()
+
+
 
 							 
 
 
-	print('Chaque Confrence   >>>>>>>>>> Title = ',Conf.title ,' Nbr_arcl  = :', Nbr_Artcl_in_Cm ,'Et Nbr_eval =: ', Nbr_eval_in_Cm)    
+		print('Chaque Confrence   >>>>>>>>>> Title = ',Conf.title ,'Et Nbr_eval =: ', Nbr_eval_in_Cm)    
 
 	return render(request, 'Pour_Evaluaéé/mth_evluéé.html')
+	context = {hg}
 	
   
 
