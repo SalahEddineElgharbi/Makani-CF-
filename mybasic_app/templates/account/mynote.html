@@ -1,0 +1,20 @@
+{% extends 'account/etat_Fg.html' %}
+
+{% block body_block %}
+<head>
+	<title>my note</title>
+</head>
+<body>
+<div class="container">
+
+{% for td in user.todolist.all %}
+<h5> Note : <p><a href="/{{td.id}}">{{td.name}}</a> </p></h5>
+<br>
+
+
+{% endfor %}
+
+</div>
+<a type="submit", class="btn btn-success" href="{% url 'LoginByProfile' %}" >
+         Back to my Profile   </a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'account/mybase.html' %}
+
+{% include 'MSG/messages.html' %}
+{% block body_block %}
+
+
+
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Votre Notification </h5>
+              </div>
+              <div class="col-sm-6">
+                                  
+              <h2 style="color:blue;" class="text-left">Hi {{user.username}} , <br> vous avez : {{notifications.count}} Notifiction </h2>
+                                  
+                </div>
+              <div class="card-body">
+                
+                  
+             
+                 {% if notifications.count > 0 %}
+
+
+<h4 style="color:red;"> Notification </h4>
+   {% for n in notifications %} 
+   <hr><hr> 
+    <p> Notification Numuro ({{notifications.count}}) ::  <a  class="btn btn-success" href="/notification/show/{{n.id}}/"> {{ n.title }}</a></p>
+    <hr><hr>
+    <br>
+
+
+    {% endfor %}
+{% else %}
+        <h1 style="color:blue;" class="text-left"> {{user.username}} , au se moment rien notifie </h1>
+{% endif %}
+          </div>
+         
+          </div>
+        </div>
+
+
+
+</div>
+
+
+{% endblock %}

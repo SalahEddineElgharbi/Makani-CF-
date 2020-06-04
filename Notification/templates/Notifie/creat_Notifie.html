@@ -1,0 +1,87 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Create Notification </h5>
+              </div>
+      <div class="card-body">
+                <form method="post">
+                  {% csrf_token %}
+        <div class="container">
+
+<h4> les Notification Sont de plusiaer type >>> et dans plusaier type on'a deux cas soit evaluateur  soit chrcheur  </h4> 
+<h4> EVALUATEUR :  <p style="color:red;"> (Attenion des Notification  pour halep  qlq chercheur ou qlq reponse... ! cette evaluateur elle doit etre élimine dans sont emploiyyyy  </p> </h4>
+<p> pour etat d'article , pour qlq ereur de corriction  </p> 
+<p> pour reglage compte   </p> 
+<p> pour change comite ou bien declareé qlq chose   </p> 
+<p> pour connu des date particulaire ....  </p> 
+
+<br>
+
+<h4> CHARCHEUR : <p style="color:red;"> (Attenion des Notification au sujet  d'article ou qlq reponse le chercheur elle doit élimine dans cette confereane ) </p> </h4>
+<p> pour etat d'article , pour qlq commente sur  corriction  </p> 
+<p> pour reglage compte   </p> 
+<p> pour connu des date particulaire ....  </p> 
+ 
+
+<br><br>
+
+
+ </div>
+
+{{ form|crispy}}
+   
+              <div class="card-footer">
+                <a class="btn btn-warning" href="{% url 'dashboard' %}">Cancel</a>
+                          
+                                  
+                       <input class="btn btn-success" type="submit" value="Create"/>
+            
+    
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+  
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Background</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors text-center">
+              <span class="badge filter badge-primary active" data-color="primary"></span>
+              <span class="badge filter badge-info" data-color="blue"></span>
+              <span class="badge filter badge-success" data-color="green"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="adjustments-line text-center color-change">
+          <span class="color-label">LIGHT MODE</span>
+          <span class="badge light-badge mr-2"></span>
+          <span class="badge dark-badge ml-2"></span>
+          <span class="color-label">DARK MODE</span>
+        </li>
+
+          
+      </ul>
+
+</div>
+</div>
+
+
+ {% endblock %}

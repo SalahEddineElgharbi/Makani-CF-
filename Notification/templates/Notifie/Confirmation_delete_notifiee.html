@@ -1,0 +1,51 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content">
+        <div class="row">
+          <div class="col-md-12 ml-auto mr-auto">
+            <div class="card card-upgrade">
+              <div class="card-header text-center">
+                        <div id="deleteEmployeeModal" >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header"> 
+                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <a href="{% url 'List_Notifeé' %}"> No ,Fermer &times;</a>
+                                  </button>
+                               
+                              </div>
+                              <br><br><br>
+                              <form  method="POST">
+                                {% csrf_token %}
+                                <div class="modal-header">		
+                                  <h3 style="color:red;"class="modal-title left">Delete Notification :  {{ object.title }} </h3>
+                                  <br><br><br>
+                                </div>
+                       <br><br>
+                                <div class="modal-body">					
+                                  <p>Are you sure you want to delete Notification  :  {{ object.title }}
+                                   ?</p>
+                                  <p class="text-warning"><small>be curfual !!!!!! This action cannot be undone.</small></p>
+                                </div>
+                               
+                                <div class="modal-footer">
+                                  
+                                  <a class="btn btn-warning" href="{% url 'List_Notifeé' %}">Cancel</a> 
+                                  <input class="btn btn-danger" type="submit" name="Confirm"> 
+                                </div>
+                              </form>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+{% endblock %}

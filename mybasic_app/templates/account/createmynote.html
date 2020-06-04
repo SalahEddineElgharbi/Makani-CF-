@@ -1,0 +1,31 @@
+{% extends 'account/etat_Fg.html' %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+	<title> Create note </title>
+</head>
+<body>
+
+<h3> Create Mynote</h3>
+<div class="container">
+
+<form  method="POST" action="{% url "create" %}">
+	
+{% csrf_token %}
+
+<div class="input-group mb-3">
+	
+		<button type="submit" name="save" class="btn btn-success">
+			Create New Note 
+		</button>
+	</div>
+{{ form.name|as_crispy_field}}
+
+</form>
+
+
+</div>
+<br><br><br><br><br>
+<a type="submit", class="btn btn-success" href="{% url 'LoginByProfile' %}" >
+         Back to my Profile   </a>
+{% endblock %}

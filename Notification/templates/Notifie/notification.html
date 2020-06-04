@@ -1,0 +1,26 @@
+{% extends 'account/mybase.html' %} 
+{% block body_block %} 
+
+   
+
+         <hr><hr>
+         <div class="container">
+
+<h2>Title off Notification  : {{notification.title}}</h2>
+
+<p>This  About :  {{notification.message}}</p>
+
+<p> Create on : {{ notification.created_on }} </p>
+
+<p><a class="btn btn-success btn-lg" href="/notification/Mark_AsViews/{{notification.id}}/"> Mark As read !!!  </a></p> 
+       </div>
+       <br><br><br>
+  <div class="text-center">
+       <a href="{% url 'Contact_Info_Adminstration:contact' %}" class="btn btn-success"><i class="material-icons"></i> <span> Repondre !!!  </span></a>
+</div>     
+       <hr><hr>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'Templchercheur/mainchr.html' %}
+{% load static %}
+{% block body_block %}
+ 
+
+  <div class="wrapper">
+    <div class="page-header">
+      <img src="{% static 'G-Admin_cherch_eval/img/dots.png' %}" class="dots">
+      <img src="{% static 'G-Admin_cherch_eval/img/path4.png' %}" class="path">
+      <div class="container align-items-center">
+
+<h1> User :{{ user.username }} ,</h1>
+<h2>  Il existe {{articles.count }} Article </h2>
+  <br><br><br><br>
+ 
+
+{% if articles|length > 0 %}
+
+  <h2 style="color:red;"> Attention !!! </h2>
+    <h3 style="color:blue;">Pour la supprission  </h3>
+   <p style="color:red;"> cette supprision definment Donc ! Confirmation final sinon Clicke Article vous pouvez supprimez !</p>
+
+
+        {% for art in articles %}
+
+        <div class="btn-wrapper pt-3">
+          <a href="{% url 'chercheur:Delate' art.id %}">
+            <button href="{% url 'chercheur:Delate' art.id %}" class="btn btn-simple btn-primary">
+              <i class="tim-icons icon-paper"></i>
+               {{art}}
+            </button>
+          </a>
+        </div>
+
+        {% endfor %}
+{% else %}
+  <h3 style="color:blue;"> * n'existe pas des articles Pour supprimer !  </h3>
+    <h5> Creé un nouveau <a href="{% url 'chercheur:CreeArticle' %}">((Crée))</a></h5>
+ {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

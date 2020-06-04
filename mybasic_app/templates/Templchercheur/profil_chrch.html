@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'G-Admin_cherch_eval/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'G-Admin_cherch_eval/img/favicon.png' %}">
+  <title>
+    article 
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="{% static 'G-Admin_cherch_eval/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="{% static 'G-Admin_cherch_eval/css/blk-design-system.css' %}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="{% static 'G-Admin_cherch_eval/demo/demo.css' %}" rel="stylesheet" />
+</head>
+
+
+
+<body class="index-page">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+    <div class="container"
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="{% url 'homme' %}" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+          <span>MAKANI•</span> cf
+
+        </a>
+
+        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+<div class="container">
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a>
+                
+              </a>
+            </div>
+            <div class="col-6 collapse-close text-right">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav">
+          <li class="nav-item p-0">
+            <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="#" target="_blank">
+              <i class="fab fa-twitter"></i>
+              <p class="d-lg-none d-xl-none">Twitter</p>
+            </a>
+          </li>
+          <li class="nav-item p-0">
+            <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="#" target="_blank">
+              <i class="fab fa-facebook-square"></i>
+              <p class="d-lg-none d-xl-none">Facebook</p>
+            </a>
+          </li>
+
+          <li class="nav-item p-0">
+            <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="#" target="_blank">
+              <i class="fab fa-instagram"></i>
+              <p class="d-lg-none d-xl-none">Instagram</p>
+            </a>
+          </li>
+          <li>
+                 <a href="{% url 'chercheur:dashboardchrch' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Back to My Dashboard
+                  </a>          
+          </li>
+
+           <li>
+                 <a href="{% url 'homme' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Homme  MAKANI-CF-
+                  </a>          
+          </li>
+
+           <li>
+                 <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Log out
+                  </a>          
+          </li>
+
+
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="fa fa-cogs d-lg-none d-xl-none"></i> My Profile
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+            
+                 <a href="{% url 'chercheur:Profile' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i>Profile Page
+              </a>
+
+
+                 
+            <a href="{% url 'mynote' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i>See My note 
+            </a>
+          
+
+
+  
+            <a href="{% url 'create' %}" class="dropdown-item"  >  
+             <i class="tim-icons icon-single-02"></i> create Note 
+            </a>
+          
+
+           
+            <a href="{% url 'Create_Newblog' %}" class="dropdown-item" >
+              <i class="tim-icons  icon-single-02">
+                         </i>   create blog Now 
+           
+            </a>
+          
+
+          
+
+            <a href="{% url 'My_List_Blog' %}" class="dropdown-item" >
+              <i class="tim-icons  icon-single-02">
+                         </i>   voir my blog 
+           
+            </a>
+
+                 <a href="{% url 'chercheur:Contact_chrch_ou_admin' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Contact Us
+              </a>
+                       
+
+                 <a href="{% url 'chercheur:AccedeauDoc_Aschrch' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Documentation
+                  </a>    
+
+               <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i> Log out
+                  </a>   
+                 </div>
+
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="fa fa-cogs d-lg-none d-xl-none"></i> Getting started
+            </a>
+
+            <div class="dropdown-menu dropdown-with-icons">
+
+      
+
+              <a href="{% url 'chercheur:tach_ARTCL' %}" class="dropdown-item">
+          <i class="tim-icons icon-paper"></i> List &  Update  & Detaille   <<<< Mes Articles >>>>
+              </a>
+              <a href="{% url 'chercheur:CreeArticle' %}" class="dropdown-item">
+                <i class="tim-icons icon-bullet-list-67"></i>créer article 
+              </a>
+              <a href="{% url 'chercheur:list_delete_Article' %}" class="dropdown-item">
+                <i class="tim-icons icon-simple-remove"></i>Delete article 
+              </a>
+
+
+              </div>
+       </li>
+
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="fa fa-cogs d-lg-none d-xl-none"></i> Gestion important
+            </a>
+                      <div class="dropdown-menu dropdown-with-icons">
+               <a href="{% url 'chercheur:topic_list' %}" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i>  Voir les confernces et les Dates imporatn
+              </a>
+              
+             <a href="#" class="dropdown-item">
+                <i class="tim-icons icon-single-02"></i>  Notification
+              </a>
+              </div> 
+            
+</li>
+</ul>
+
+</div>
+{% include 'MSG/messages.html' %}
+</div>
+
+</nav>
+    
+
+  <!-- End Navbar -->
+  <div class="wrapper">
+
+    <div class="page-header header-filter">
+      <div class="squares square1"></div>
+      <div class="squares square2"></div>
+      <div class="squares square3"></div>
+      <div class="squares square4"></div>
+      <div class="squares square5"></div>
+      <div class="squares square6"></div>
+      <div class="squares square7"></div>
+
+     
+<div class="container">
+        <div class="content-center brand">
+          <br><br><br>  
+
+  
+                <div class="container align-items-center">
+
+        <div class="row">
+
+          <div class="col-lg-6 col-md-6">
+          <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+
+                 {% if notifications.count > 0 %}
+
+   <h2 style="color:blue;" class="text-left">Hi {{user.username}} , <br> vous avez : {{notifications.count}} Notifiction </h2>
+
+<h4 style="color:red;"> Notification </h4>
+
+   {% for n in notifications %}  
+    <h3> Notification Numuro ({{notifications.count}}) : {{ n.title }}</h3>
+    <br><br>
+    <h2> Clique pour Mark as viwed ou bien repondre !!! <br>  - pour bien confirme que vous prender en charge cette notification 
+     <a href="/notification/show/{{n.id}}/"> - {{ n.title }}</a></h2>
+    <br><br>
+<br><br>
+
+    {% endfor %}
+{% else %}
+        <h1 style="color:blue;" class="text-left"> {{user.username}} , au se moment rien notifie  ! / None  Notifiction </h1>
+{% endif %}
+         
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  <h3 class="h1-seo">
+<a href="#"> o    Consultation de la procédure de la soumission des articles,</a>
+</h3>
+<br>
+  <h3 class="h1-seo">
+
+ <a href="#"> o    Soumission d’un article,</a>
+</h3> <br>
+  <h3 class="h1-seo">
+
+ <a href="#"> o    Récupération de la notification et les résultats de reviewing, </a>
+</h3><br>
+  <h3 class="h1-seo">
+
+<a href="#">  o    Soumission de la version finale de l’article,</a>
+</h3>
+
+  </div>
+
+
+
+    <div class="page-header">
+      <img src="{% static 'G-Admin_cherch_eval/img/dots.png' %}"
+       class="dots"> 
+      <img src="{% static 'G-Admin_cherch_eval/img/path4.png' %}"
+             class="path">
+
+      </div>
+    </div>
+
+
+
+         <div class="container ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i> Voir etat de Ma Article !
+              </button>
+            </div>
+
+<br><br><br>
+
+         <div class="container ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i>  Voir exmplaire & et comment Poste mon Article
+              </button>
+            </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-md-6">
+            <div class="row justify-content-between align-items-center">
+         
+
+       <div class="col-md-5">
+            <h1 class="profile-title text-left">Contact us , pour ++ d'info !</h1>
+            <h5 class="text-on-back">les dates important  </h5>
+            <p class="profile-description text-left">
+              <br>
+déposé article   
+<br>
+  date limite soumission <br>
+      revieuers(évaluation) 
+    <br> date fin évaluation   
+
+ préparation chercheur  conférence   
+ <br>     date de conférence
+ <br>      conférence 
+ 
+ <br>     Sinon  "annuler" 
+
+              </p>
+
+            </div>
+
+
+            </div>
+          </div>
+          
+          <div class="col-md-5">
+            <h1 class="profile-title text-left">My etape avnat choix d'Article Regles</h1>
+            <h5 class="text-on-back">Des regles </h5>
+            <p class="profile-description text-left">
+              
+     Il s’agit de toute personne ayant rédigé un article qui s’articule autour du thème<br>
+      principal de la conférence et qui souhaite le soumettre en ligne pour évaluation.
+<br>
+
+(
+poster article par dialogue box (fenêtre ouvrante)
+<br>
+ Si article ajouter sans problème  affichage article (background (fenêtre principale ))
+<br>
+Sinon  notification email : article non posté (erreur)
+)
+**Le chercheur accède à l’interface du site puis s’authentifie s’il est déjà inscrit 
+<br>
+sinon il faut inscrit  
+<br>
+**il crée un compte dans laquelle il va remplir un formulaire pour fournir un certain 
+<br>
+nombre d’informations, notamment, son nom, un mot de passe, un bref résumé et les différents thèmes qu’il aborde Une fois que ces informations ont été correctement saisies, le système ajoute cette personne  a la base de donné de l’utilisateur afin de ne pas répéter  la même longue procédure à chaque fois il veut poster un article .
+** le système donne la main à l’utilisateur pour sélectionner le thème en question .
+ alors :
+     **  s’inscrire (intéresser)/ annuler (non intéresser) conférence . 
+     ** le chercheur peut soumettre un(des) article(s) format pdf.
+     **  supprimer ou modifier les articles soumis si la date précise par l’administrateur ne                                       termine pas 
+      ** modifier leur profiles.
+      ** il peut voir les informations de la conférence(programme, modification , des nouvelles …(lien si réussit ))
+
+            </p>
+   
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+
+             <div class="btn-wrapper pt-3 ">
+
+              <button href="#" class="btn btn-simple btn-success btn-info-user">
+                <i class="tim-icons icon-bulb-63"></i> nouveau theme et nouveau dates !
+              </button>
+            </div>
+
+
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-plain">
+            <div class="card-header">
+              <h1 class="profile-title text-left">*****  By Makani-CF- ******</h1>
+              <h5 class="text-on-back">Just click ,Pour contact </h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>
+<h2 class="text-white">
+          Contact Rapide By email off user !! ,
+<br>
+you need to use You'r email  off signin , 
+    </h2>
+                      </label>
+                      <h4 class="text-white">You Can use this email !!! <br><br>
+
+                      {{ user.email}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-round float-right" >
+               <a href="{% url 'chercheur:Contact_chrch_ou_admin' %}"> <<< Send iT >>>  </a>
+              </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <div class="info info-horizontal">
+            <div class="icon icon-primary">
+              <i class="tim-icons icon-square-pin"></i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">Find us at the office</h4>
+              <p> Makani@gemail.com
+                <br> ESI SBA ,
+                <br> Algeria
+              </p>
+            </div>
+          </div>
+          <div class="info info-horizontal">
+            <div class="icon icon-primary">
+              <i class="tim-icons icon-mobile"></i>
+            </div>
+            <div class="description">
+              <h4 class="info-title">Give us a ring</h4>
+              <p> 
+                <br> +47 77 77 777 777 77 
+                <br> Mon - Mai, 2020 - 06 -10
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  </div>
+  
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h1 class="title"></h1>
+          </div>
+        
+          <div class="col-md-3">
+            <ul class="nav">
+              <li class="nav-item">
+                 <a href="{% url 'chercheur:Contact_chrch_ou_admin' %}"  class="nav-link">
+                  Contact Us
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'Aboute__Us' %}" class="nav-link">
+                  About Us
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  License
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3 class="title">Follow us:</h3>
+            <div class="btn-wrapper profile">
+              <a target="_blank" href="#" class="btn btn-icon btn-neutral btn-round btn-simple" data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a target="_blank" href="#" class="btn btn-icon btn-neutral btn-round btn-simple" data-toggle="tooltip" data-original-title="Like us">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+              <a target="_blank" href="#" class="btn btn-icon btn-neutral  btn-round btn-simple" data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-dribbble"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="{% static 'G-Admin_cherch_eval/js/core/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'G-Admin_cherch_eval/js/core/popper.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'G-Admin_cherch_eval/js/core/bootstrap.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/bootstrap-switch.js' %}"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/nouislider.min.js' %}" type="text/javascript"></script>
+  <!-- Chart JS -->
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/chartjs.min.js' %}"></script>
+  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/moment.min.js' %}"></script>
+  <script src="{% static 'G-Admin_cherch_eval/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="{% static 'G-Admin_cherch_eval/demo/demo.js' %}"></script>
+  <!-- Control Center for Black UI Kit: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'G-Admin_cherch_eval/js/blk-design-system.min.js' %}" type="text/javascript"></script>
+  
+
+
+  <script>
+    $(document).ready(function() {
+      blackKit.initDatePicker();
+      blackKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+
+</html>

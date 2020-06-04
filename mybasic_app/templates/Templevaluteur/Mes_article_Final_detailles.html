@@ -1,0 +1,108 @@
+{% extends 'account/mybase.html' %}
+{% block body_block %}
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12  ">
+            <div class="col-sm-12 text-center">
+                                  
+                         <a href="#" class="btn btn-warning"> Nombre des Articles Pour les Corriges est   : 
+                         {{ evalu.artcl_a_corrige.count }} Articles  </a> 
+                         <br>
+                    
+                </div>
+  <br><br><br>
+<h2 style="color:blue;"> Mes articles avec detailles  </h2> 
+</div>
+
+
+                <div class="table-responsive">
+                  <table class="table table-striped jambo_table bulk_action">
+                    <thead>
+                      <tr class="headings">
+                        <th>
+                                                </th>
+
+                        <th class="column-title" style="display: table-cell;">Title</th>
+                        <th class="column-title" style="display: table-cell;">date poste </th>
+
+                        <th class="column-title" style="display: table-cell;">Documentation </th>
+
+                        <th class="column-title" style="display: table-cell;"> Last Update  </th>
+
+                        <th class="column-title" style="display: table-cell;"> date poste documentation  </th>
+
+                        <th class="column-title" style="display: table-cell;">description </th>                       
+                        <th class="column-title" style="display: table-cell;">author(Chercheur)</th>
+                        <th class="column-title" style="display: table-cell;">Conferance </th>
+                         <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Corrige</span>
+                        </th>
+                         <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Etat de cette article</span>
+                        </th>
+                        <th class="bulk-actions" colspan="7" style="display: none;">
+                          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+{% for art in evalu.artcl_a_corrige.all %}
+
+
+                      <tr class="even pointer">
+                        <td class="a-center ">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked="">
+                              <span class="form-check-sign"></span>
+                              
+                            </label>
+                          </div>                        </td>
+                        <td class=" ">{{ art.name }}</td>
+                        <td class=" ">{{art.date_posté}} </td>
+        <td class=" ">
+          <a href="{{art.document.url}}" download>{{art.document}}
+      <button type="button" class="btn btn-info" style="float:right;">
+          Download
+        </button>
+        </a>
+        </td>
+                        <td class=" ">{{art.updated}}</td>
+                        <td class=" ">{{art.uploaded_at}}</td>
+                        <td class=" ">{{art.description}}</td>
+                        <td class=" ">{{art.author}}</td>
+                        <td class=" ">{{art.Conferance}}</td>
+           
+                        </td>
+                         <td class=" last"><a href="{% url 'evaluteur:evaluéé' %}">Corrige Now !</a>
+                        </td>
+                         <td class=" last"><a href="{% url 'evaluteur:Just_Notification' %}">Mon etat & notification </a>
+                        </td>
+                      </tr>
+                  
+{% endfor %}
+
+
+                    </tbody>
+
+                  </table>
+                </div>
+
+      
+              </div>
+                      <div class="col-sm-12 text-center">
+               <a href="{% url 'evaluteur:dashboardeval' %}" class="btn btn-info btn-round btn-lg"> Back </a>
+               </div>
+            </div>
+          </div>
+
+          
+
+    
+
+
+
+
+
+
+
+{% endblock %}

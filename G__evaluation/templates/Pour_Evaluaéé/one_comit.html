@@ -1,0 +1,44 @@
+ 
+    <div class="content">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card">
+
+ 
+       {% for ar in articles %}
+       
+                  <li>
+              {{ ar.name }}
+            
+            
+            
+
+          </li>
+
+          {% endfor %}
+
+          <br>
+
+
+
+                 {% for ev in evaluateurs %}
+       
+                  <li>
+           
+              {{ ev }}
+            
+            
+            
+
+          </li>
+
+          {% endfor %}
+
+<br>
+<br>
+          <a href="{% url 'Destr' comit.id %}">Destribue : {{comit}}</a>
+
+</div>
+</div>
+</div>
+</div>

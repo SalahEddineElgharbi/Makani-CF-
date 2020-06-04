@@ -1,0 +1,59 @@
+{% extends 'account/mybase.html' %} 
+
+{% include 'MSG/messages.html' %}
+{% block body_block %} 
+
+
+
+
+<div class="container">
+
+      <tr>
+          <br><br>  <br><br>
+        <td>
+
+              <div class="col-sm-12 text-center">
+            <a href="{% url 'evaluteur:listeArtcile' %}" class="btn btn-warning">
+             
+              <p>All Articles</p>
+            </a>
+          </div>
+         </td>
+  <br><br>
+<td>
+  
+
+              <div class="col-sm-12 text-center">
+            <a href="{% url 'evaluteur:All_Confernce' %}" class="btn btn-warning">
+             
+              <p>All Confernces</p>
+            </a>
+        </div>
+</td>
+  <br><br>
+     <td>     
+
+              <div class="col-sm-12 text-center">   
+            <a href="{% url 'evaluteur:Etat_All_Chrch' %}" class="btn btn-warning">
+             
+              <p>All Chercher</p>
+            </a>
+          </div>
+        </td>
+          <br><br>
+
+             <td> 
+
+              <div class="col-sm-12 text-center">
+            <a href="{% url 'evaluteur:AllCommite' %}" class="btn btn-warning">
+             
+              <p>All Commite </p>
+            </a>
+          </div>
+    </td>
+  <br><br>
+</tr>
+
+        </div>
+
+  {% endblock %}
