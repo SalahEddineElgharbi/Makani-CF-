@@ -204,3 +204,19 @@ class ChoosingForm(forms.ModelForm ):
         model = Choosing_map
         fields = ('art1' , 'art2' , 'art3')
         #exclude = ['evalu' , 'comit']
+
+
+
+# ++++++++++++++++++++++  2020 / 06 /05 ++++++++++
+from django.forms import ModelForm ,TextInput,Textarea
+from mybasic_app.models import Comment
+
+class CommentForm(ModelForm):
+    class Meta:
+        model  = Comment
+        fields = ('text',)
+
+        widgets = {
+        'text': Textarea(attrs={'class':'editable medium-editor-textarea'}) 
+        }   
+

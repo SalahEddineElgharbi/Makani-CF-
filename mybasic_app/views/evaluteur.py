@@ -267,8 +267,89 @@ def final_detailles(request ):
                 if (par.comit == comit):
                     data[par.arti] = par.comit
 
-
-    context = {'evalu':evalu }
+    comments = Comment.objects.filter(authorComment__evaluateur=evalu)
+    context = {'evalu':evalu , 'comments':comments} 
     return render(request,'Templevaluteur/Mes_article_Final_detailles.html' , context)
+
+
+
+
+
+
+
+
+
+# ++++++++++++++++++++++++++++++  2020/06/05 ++++++++++++++++++++++++
+from mybasic_app.forms import CommentForm
+from mybasic_app.models import Comment,Evaluateur,User
+from django.shortcuts import get_object_or_404
+
+
+@login_required
+@evaluteur_required
+def add_comment_to_Article(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    User = request.user
+    if request.method == 'POST' :
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            Comment = form.save(commit=False)
+            Comment.article = article
+            Comment.authorComment=User
+            Comment.save()
+            messages.success(request,"Your Comment was Create successfully !!! , From @Makani-CF-")
+
+            return redirect('evaluteur:Mes_Comment')    #, pk=article.pk)
+    else :
+        form  = CommentForm()
+    return render(request,'Commentaire/comment_form.html',{'form' : form})         
+
+
+
+
+
+  
+@login_required
+@evaluteur_required
+def comment_approve(request,pk):
+    comment = get_object_or_404(Comment,pk=pk)
+    comment.approve()
+    messages.success(request,"Your Comment off \n"+  str(comment) +" \n was Approved successfully !!! , From @Makani-CF-")
+    return redirect('evaluteur:Mes_Comment')
+
+
+
+
+  
+@login_required
+@evaluteur_required
+def comment_remove(request,pk):
+    comment = get_object_or_404(Comment,pk=pk)
+    article_pk =comment.article.pk
+    comment.delete()
+    messages.success(request,"Your Comment was Deleted  !!! , From @Makani-CF-")
+    return redirect('evaluteur:Mes_Comment')
+
+
+
+
+@login_required
+@evaluteur_required
+def Mes_Comment(request ): 
+    evalu = Evaluateur.objects.get(user = request.user)
+    comits = Commite.objects.filter( evaluteur_list= evalu )
+    paral = Pair.objects.filter( evalu = evalu )
+    arts = Article.objects.filter(pair__evalu = evalu)
+    data = {}
+    for comit in comits :
+            for par in paral :
+                if (par.comit == comit):
+                    data[par.arti] = par.comit
+
+    comments = Comment.objects.filter(authorComment__evaluateur=evalu)
+    comments_All = Comment.objects.all()
+    context = {'evalu':evalu , 'comments':comments,'comments_All':comments_All}
+    return render(request,'Templevaluteur/Commen_chaq_Mes_articl.html' , context)
+
 
 

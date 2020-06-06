@@ -1,49 +1,46 @@
-{% extends 'Templchercheur/mainchr.html' %}
-{% load static %}
+
+{% extends 'account/mybase.html' %}
 {% block body_block %}
+                       {% include 'MSG/messages.html' %}
 
-  <div class="">
-    <div class="">
-      <img src="{% static 'G-Admin_cherch_eval/img/dots.png' %}" class="dots">
-      <img src="{% static 'G-Admin_cherch_eval/img/path4.png' %}" class="path">
-      <div class="container align-items-center">
 
-                                                  <br><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12  ">
+            <div class="col-sm-12 text-center">
+                         <a href="{% url 'evaluteur:Mes_article_Final_detailles' %}" class="btn btn-warning"> Nombre des Articles Pour les Corriges est   : 
+                         {{ evalu.artcl_a_corrige.count }} Articles  </a> 
+                         <br>
+                         <br>
+                                 <br><br><br>
+     <a href="{% url 'evaluteur:Mes_Comment' %}" class="btn btn-warning">
+      you Poste  {{comments.count}} Comments,  !!!</a>
+                    
+                </div>
+  <br><br>
+<h2 style="color:blue;">Les commentiare pour chaque article ! </h2>
+{% for art in evalu.artcl_a_corrige.all %}
 
-                                        <div class="text-center">
-     <a href="{% url 'chercheur:tach_ARTCL' %}" class="btn btn-warning">
-      you Poste  {{comments.count}} Comments, !!!</a>
-
-                                        <br><br><br>
-                                      </div>
-
-  <h2 style="color:blue;"> clicke pour voir detailles ou bient modifier !!! </h2>
-
-        {% for art in articles %}
-
-        <div class="btn-wrapper pt-3">
-          <a href="{% url 'chercheur:Update' art.id %}">
-            <button href="{% url 'chercheur:Update' art.id %}" class="btn btn-simple btn-primary">
-              <i class="tim-icons icon-paper"></i>
-
-          Article :     {{art.name}}
-            
-            </button>
-          </a>
-
-      <br><br>
+    <br>
+  <h4> Article : {{art}} </h4>
 
 <a class=" btn btn-primary btn-comment" 
-href="{% url 'chercheur:add_comment_to_Article' pk=art.pk %}">Add Comment</a>
+href="{% url 'evaluteur:add_comment_to_Article' pk=art.pk %}">Add Comment</a>
 <br>
 
 
+
 {% for comment in comments_All %} 
+<hr>
+<hr>
+
+
 {% if comment in comments %}
-<hr><hr>
+<br>
   {% if request.user.is_authenticated or comment.approved_comments %}
     {%if comment.article == art %} 
-<h3 style="color:blue;"> My Comment !! </h3>
+    <h3 style="color:blue;"> My Comment !! </h3>
+
 
 <h4> Create On :  {{ comment.created_date }}</h4>
 <h4> Text :   {{ comment.text|safe|linebreaksbr }}</h4>
@@ -58,7 +55,7 @@ href="{% url 'chercheur:add_comment_to_Article' pk=art.pk %}">Add Comment</a>
     <span class="glyphicon glyphicon-remove"></span>
   </a>
 
-<br>
+<br><br><br>
 
    {% endif %}
  {% endif %}
@@ -81,7 +78,7 @@ href="{% url 'chercheur:add_comment_to_Article' pk=art.pk %}">Add Comment</a>
     Approve this comment (Good one) 
     <span class="glyphicon glyphicon-ok"></span>
   </a>
-<br><br>
+<br>
 
    {% endif %}
 <br>
@@ -94,14 +91,13 @@ href="{% url 'evaluteur:add_comment_to_Article' pk=art.pk %}"
 {% endfor %}
 
 
-<br>
-        {% endfor %}
-</div>
-</div>
-</div>
 
- </div>
 
+{% endfor %}
+
+</div>
+</div>
+</div>
 
 
 {% endblock %}

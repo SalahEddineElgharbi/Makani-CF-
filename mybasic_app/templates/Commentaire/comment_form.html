@@ -1,0 +1,22 @@
+{% extends 'account/mybase.html' %} 
+
+{% block body_block  %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+<h3> New Comment  </h3>
+
+<form class="post-form" method="POST">
+	{% csrf_token %}
+    {{form |crispy}}
+<div class="text-center">
+<button type="submit"class="btn btn-success"><i class="material-icons"></i> 
+
+Post  Comment </button>
+</div>
+</form>
+</div>
+
+<script> var editor = new MediumEditor('.editable');</script>
+<br><br><br><br>
+{% endblock %}

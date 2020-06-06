@@ -33,6 +33,10 @@ urlpatterns = [
       path('topic_list/',chercheur.topicList.as_view(),name='topic_list'),
 
 
+      path('article/<pk>/comment',chercheur.add_comment_to_Article,name="add_comment_to_Article"),
+      path('comment/<pk>/approve',chercheur.comment_approve,name="comment_approve"),
+      path('comment/<pk>/remove',chercheur.comment_remove,name="comment_remove"),
+      #just add /<pk>\d+  bach  ji mhachyaa les url 
 
                                      ], 'views'), namespace='chercheur')),
 
@@ -63,6 +67,10 @@ urlpatterns = [
        path('detailles/',evaluteur.final_detailles , name='Mes_article_Final_detailles'),
 
 
+      path('article/<pk>/comment',evaluteur.add_comment_to_Article,name="add_comment_to_Article"),
+      path('comment/<pk>/approve',evaluteur.comment_approve,name="comment_approve"),
+      path('comment/<pk>/remove',evaluteur.comment_remove,name="comment_remove"),
+      path('Mescomment',evaluteur.Mes_Comment,name="Mes_Comment"),
 
  
                                       ], 'views'), namespace='evaluteur')),
@@ -79,8 +87,6 @@ urlpatterns = [
     path('merci/',views.Merci, name="merci"),
 
 
-
-    
         ]
 
 

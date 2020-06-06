@@ -162,9 +162,9 @@ class Conferance(models.Model):
 class Article(models.Model):
     name = models.CharField(max_length=200, unique=True)
     description = RichTextField(blank=True )
-    author = models.ForeignKey(Chercheur,null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(Chercheur, null=True,   on_delete=models.SET_NULL)
     date_posté = models.DateTimeField(auto_now_add=True)
-    Conferance = models.ForeignKey(Conferance ,null=True,  on_delete=models.SET_NULL)
+    Conferance = models.ForeignKey(Conferance ,null=True ,on_delete=models.SET_NULL)
     document = models.FileField(upload_to='documents_Chercheur/',null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)   
@@ -174,5 +174,26 @@ class Article(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+# +++++++++++++++++++++++++++++++++++++++   2020 / 05 / 06 
+from django.utils import timezone
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article,null=True ,on_delete=models.SET_NULL)
+    authorComment = models.ForeignKey(User, null=True ,on_delete=models.SET_NULL)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comments = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comments = True
+        self.save()
+
+    
+    def __str__(self):
+        return self.text     
 
 

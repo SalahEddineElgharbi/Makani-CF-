@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, UpdateView,DetailView
 from ..decorators import chercheur_required
 from ..forms import ChercheurSignUpForm,From_Edite_Profile,ArticleForm,ConfForm
-from ..models import User,Chercheur ,Article,Topic,Conferance
+from ..models import User,Chercheur ,Article,Topic,Conferance,Comment
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 from django.forms import inlineformset_factory
@@ -168,12 +168,12 @@ def Delete(request , pk):
 def Update_detaille_list(request):
 	User = request.user 
 	researcher = Chercheur.objects.get(user=User)
-	articles = Article.objects.filter(author = researcher) ##++++++++++++++ chkon li dar hada aartcile
-   ############              #######      ##########
-	#chrch = chercheur.objects.all()
+	articles = Article.objects.filter(author = researcher)   ##++++++++++++++ chkon li dar hada aartcile
+	comments = Comment.objects.filter(authorComment__chercheur=researcher)
+	comments_All = Comment.objects.all()
 	myfilter=FilterClass(request.GET , queryset=articles)
 	articles = myfilter.qs
-	context = {'articles': articles ,'myfilter':myfilter}
+	context = {'articles': articles ,'myfilter':myfilter , 'comments':comments,'comments_All':comments_All}
 	
 	return render(request, 'Templchercheur/les_articl_Detailles.html' , context)
 
@@ -225,7 +225,6 @@ def confList(request, pk):
 
 
 
-
 @method_decorator([login_required, chercheur_required], name='dispatch')
 class topicList(SuccessMessageMixin,ListView):
    template_name = 'Templchercheur/All_Topics.html'
@@ -247,4 +246,59 @@ class ConfDetailView(DetailView):
     form_class = ConfForm
 
 
+
+
+
+
+# ++++++++++++++++++++++++++++++  2020/06/05 ++++++++++++++++++++++++
+from mybasic_app.forms import CommentForm
+from mybasic_app.models import Comment,Chercheur,User
+from django.shortcuts import get_object_or_404
+
+
+  
+@login_required
+@chercheur_required
+def add_comment_to_Article(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    User = request.user
+    if request.method == 'POST' :
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            Comment = form.save(commit=False)
+            Comment.article = article
+            Comment.authorComment=User
+            Comment.save()
+            messages.success(request,"Your Comment was Create successfully !!! , From @Makani-CF-")
+
+            return redirect('chercheur:tach_ARTCL')    #, pk=article.pk)
+    else :
+        form  = CommentForm()
+    return render(request,'Commentaire/comment_form.html',{'form' : form})         
+
+
+
+
+
+  
+@login_required
+@chercheur_required
+def comment_approve(request,pk):
+    comment = get_object_or_404(Comment,pk=pk)
+    comment.approve()
+    messages.success(request,"Your Comment off \n"+  str(comment) +" \n was Approved successfully !!! , From @Makani-CF-")
+    return redirect('chercheur:tach_ARTCL')
+
+
+
+
+  
+@login_required
+@chercheur_required
+def comment_remove(request,pk):
+    comment = get_object_or_404(Comment,pk=pk)
+    article_pk =comment.article.pk
+    comment.delete()
+    messages.success(request,"Your Comment was Deleted  !!! , From @Makani-CF-")
+    return redirect('chercheur:tach_ARTCL')
 

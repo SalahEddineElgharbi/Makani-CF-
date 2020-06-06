@@ -6,10 +6,12 @@
           <div class="col-md-12 col-sm-12  ">
             <div class="col-sm-12 text-center">
                                   
-                         <a href="#" class="btn btn-warning"> Nombre des Articles Pour les Corriges est   : 
+                         <a href="{% url 'evaluteur:Mes_article_Final_detailles' %}" class="btn btn-warning"> Nombre des Articles Pour les Corriges est   : 
                          {{ evalu.artcl_a_corrige.count }} Articles  </a> 
                          <br>
-                    
+                                 <br><br><br>
+     <a href="{% url 'evaluteur:Mes_Comment' %}" class="btn btn-warning">
+      you have {{comments.count}} Comments, !!!</a>
                 </div>
   <br><br><br>
 <h2 style="color:blue;"> Mes articles avec detailles  </h2> 
@@ -37,6 +39,7 @@
                         <th class="column-title" style="display: table-cell;">Conferance </th>
                          <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Corrige</span>
                         </th>
+
                          <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Etat de cette article</span>
                         </th>
                         <th class="bulk-actions" colspan="7" style="display: none;">
@@ -47,14 +50,18 @@
                     <tbody>
 {% for art in evalu.artcl_a_corrige.all %}
 
-
                       <tr class="even pointer">
                         <td class="a-center ">
                           <div class="form-check">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" checked="">
                               <span class="form-check-sign"></span>
-                              
+                        
+
+                          <br><br>
+                          <br><br><br><br>
+
+                          <br><br>
                             </label>
                           </div>                        </td>
                         <td class=" ">{{ art.name }}</td>
@@ -77,13 +84,16 @@
                         </td>
                          <td class=" last"><a href="{% url 'evaluteur:Just_Notification' %}">Mon etat & notification </a>
                         </td>
+
                       </tr>
-                  
+                
+                    
+
+
 {% endfor %}
 
 
                     </tbody>
-
                   </table>
                 </div>
 
@@ -96,13 +106,6 @@
           </div>
 
           
-
-    
-
-
-
-
-
 
 
 {% endblock %}

@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 
-from mybasic_app.models import ToDolist, Item
+from mybasic_app.models import ToDolist, Item,Article
 from mybasic_app.forms import createNotelist
 
 
@@ -104,5 +104,8 @@ def mylist(response, id):
 
         return render(response, "account/myliste.html", {"ls": ls})
     return render(response, "account/mynote.html", {})
+
+
+
 
 
