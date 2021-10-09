@@ -1,33 +1,24 @@
-argon2-cffi==19.2.0
-bcrypt==3.1.7
-certifi==2020.4.5.1
-cffi==1.14.0
-chardet==3.0.4
-Django==2.2.5
-django-bootstrap3==12.0.3
-django-braces==1.14.0
-django-ckeditor==5.9.0
-django-crispy-forms==1.9.0
-django-debug-toolbar==2.2
-django-filter==2.2.0
-django-js-asset==1.2.2
-Faker==4.0.2
-idna==2.9
-misaka==2.1.1
-Pillow==7.1.0
-pycparser==2.20
-python-dateutil==2.8.1
-pytz==2019.3
-requests==2.23.0
-six==1.14.0
-sqlparse==0.3.0
-stripe==2.45.0
-text-unidecode==1.3
-urllib3==1.25.9
-wincertstore==0.2
-***************************************       99rwaa commnte w chofo kmle blk kch idea wlaa  *********************************
+Le but de ce projet est de concevoir et réaliser une application pour la gestion des conférences.
 
-hado jdooooooooooooooode  :
-django-ckeditor==5.9.0
-django-filter==2.2.0
-django-js-asset==1.2.2
+Cette application s’articule sur trois sessions principales :
+
+•	Session chercheur :
+
+o	Consultation de la procédure de la soumission des articles,
+o	Soumission d’un article,
+o	Récupération de la notification et les résultats de reviewing, 
+o	Soumission de la version finale de l’article,
+
+•	Session Evaluateur (reviewer) : 
+
+o	Consulter les articles,
+o	Sélectionner les articles pour reviewing
+o	Marquer les articles en conflit
+o	Dépôt des résultats de reviewing.
+
+•	Session administrateur 
+
+o	Gestion des comptes et droits d’accès
+o	Mise à jour des différentes entités (articles, répartition des articles pour reviewing)
+o	Notification des décisions finales,
+o	Diffuser les sites des conférences.
